@@ -3,6 +3,7 @@ package com.robot.apocalypsesurvivors.controller;
 import com.robot.apocalypsesurvivors.entity.Survivor;
 import com.robot.apocalypsesurvivors.service.SurvivorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,24 @@ public class SurvivorController {
 
     @Autowired
     private SurvivorService survivorService;
+
+    @GetMapping("/infected")
+    public ResponseEntity<List<Survivor>> getInfectedSurvivors() {
+        List<Survivor> infectedSurvivors = survivorService.getInfectedSurvivors();
+        return ResponseEntity.ok(infectedSurvivors);
+    }
+
+    @GetMapping("/nonInfected")
+    public ResponseEntity<List<Survivor>> getNonInfectedSurvivors() {
+        List<Survivor> nonInfectedSurvivors = survivorService.getNonInfectedSurvivors();
+        return ResponseEntity.ok(nonInfectedSurvivors);
+    }
+
+    @PutMapping("/{survivorId}/report-contamination")
+    public ResponseEntity<Void> reportContamination(@PathVariable Long survivorId) {
+        survivorService.reportContamination(survivorId);
+        return ResponseEntity.ok().build();
+    }
 
     //Create a new survivor
     @PostMapping

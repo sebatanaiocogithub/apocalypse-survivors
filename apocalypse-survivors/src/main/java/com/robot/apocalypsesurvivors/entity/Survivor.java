@@ -21,25 +21,29 @@ public class Survivor {
     private String gender;
 
     @Column(name =  "location")
-    private Double location;
+    private String location;
 
-    @Column(name =  "infection")
-    private Boolean infection;
+    @Column(name =  "infected")
+    private Boolean infected;
 
     @Column(name =  "inventory")
     private String inventory;
 
+    @Column(name =  "contaminationReports")
+    private Integer contaminationReports;
+
     public Survivor() {
     }
 
-    public Survivor(Long id, String name, Integer age, String gender, Double location, Boolean infection, String inventory ) {
+    public Survivor(Long id, String name, Integer age, String gender, String location, Boolean infected, String inventory, Integer contaminationReports ) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.location = location;
-        this.infection = infection;
+        this.infected = infected;
         this.inventory = inventory;
+        this.contaminationReports = contaminationReports;
     }
 
     public Long getId() {
@@ -58,7 +62,7 @@ public class Survivor {
         this.name = name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
@@ -74,20 +78,20 @@ public class Survivor {
         this.gender = gender;
     }
 
-    public Double getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(Double location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
-    public Boolean getInfection() {
-        return infection;
+    public Boolean getInfected() {
+        return infected;
     }
 
-    public void setInfection(Boolean infection) {
-        this.infection = infection;
+    public void setInfected(Boolean infected) {
+        this.infected = infected;
     }
 
     public String getInventory() {
@@ -98,6 +102,12 @@ public class Survivor {
         this.inventory = inventory;
     }
 
+    public Integer getContaminationReports() {
+        return contaminationReports;
+    }
 
+    public void setContaminationReports(Integer contaminationReports) {
+        this.contaminationReports = contaminationReports;
+    }
 
 }

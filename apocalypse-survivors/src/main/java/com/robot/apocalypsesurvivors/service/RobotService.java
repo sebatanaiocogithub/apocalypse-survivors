@@ -14,6 +14,21 @@ public class RobotService {
     @Autowired
     private RobotRepository robotRepository;
 
+    //Get by category
+    public List<Robot> getRobotsByCategory(String category) {
+        return robotRepository.findByCategory(category);
+    }
+
+    //Get by Land category
+    public List<Robot> getRobotsByLandCategory() {
+        return robotRepository.findByCategory("Land");
+    }
+
+    //Get by Flying category
+    public List<Robot> getRobotsByFlyingCategory() {
+        return robotRepository.findByCategory("Flying");
+    }
+
     //Post new robot
     public Robot createRobot(Robot robot) {
         return robotRepository.save(robot);
@@ -33,10 +48,5 @@ public class RobotService {
     public void deleteRobot(Long id) {
         robotRepository.deleteById(id);
     }
-
-    //Get by category
-    public List<Robot> getRobotsByCategory(String category) {
-        return robotRepository.findByCategory(category);
-        }
 
 }

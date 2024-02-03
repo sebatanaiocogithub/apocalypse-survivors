@@ -2,6 +2,7 @@ package com.robot.apocalypsesurvivors.service;
 
 import com.robot.apocalypsesurvivors.entity.Survivor;
 import com.robot.apocalypsesurvivors.repository.SurvivorRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +15,34 @@ public class SurvivorService {
     @Autowired
     private SurvivorRepository survivorRepository;
 
+    public void reportContamination(Long survivorId) {
+        Survivor survivor = survivorRepository.findById(survivorId)
+                .orElseThrow(() -> new EntityNotFoundException("Survivor not found"));
+
+        // Increment the contamination reports
+        survivor.setContaminationReports(survivor.getContaminationReports() + 1);
+
+        // Check if the survivor should be marked as infected
+        if (survivor.getContaminationReports() >= 3) {
+            survivor.setInfected(true);
+        }
+
+        survivorRepository.save(survivor);
+    }
+
+    public List<Survivor> getInfectedSurvivors() {
+        return survivorRepository.findByInfectedTrue();
+    }
+
+    public List<Survivor> getNonInfectedSurvivors() {
+        return survivorRepository.findByInfectedFalse();
+    }
+
     //Create new survivor
     public Survivor createSurvivor(Survivor survivor) {
         return survivorRepository.save(survivor);
     }
+
 
     //Get all survivors
     public List<Survivor> getAllSurvivors() {
