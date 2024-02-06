@@ -20,11 +20,14 @@ public class Survivor {
     @Column(name = "gender")
     private String gender;
 
-    @Column(name =  "location")
-    private String location;
-
     @Column(name =  "infected")
     private Boolean infected;
+
+    @Column(name =  "latitude")
+    private Double latitude;
+
+    @Column(name =  "longitude")
+    private Double longitude;
 
     @Column(name =  "inventory")
     private String inventory;
@@ -32,16 +35,26 @@ public class Survivor {
     @Column(name =  "contaminationReports")
     private Integer contaminationReports;
 
+
     public Survivor() {
     }
 
-    public Survivor(Long id, String name, Integer age, String gender, String location, Boolean infected, String inventory, Integer contaminationReports ) {
+    public Survivor(Long id,
+                    String name,
+                    Integer age,
+                    String gender,
+                    Boolean infected,
+                    Double latitude,
+                    Double longitude,
+                    String inventory,
+                    Integer contaminationReports ) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.gender = gender;
-        this.location = location;
         this.infected = infected;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.inventory = inventory;
         this.contaminationReports = contaminationReports;
     }
@@ -78,12 +91,20 @@ public class Survivor {
         this.gender = gender;
     }
 
-    public String getLocation() {
-        return location;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
     }
 
     public Boolean getInfected() {
@@ -109,5 +130,6 @@ public class Survivor {
     public void setContaminationReports(Integer contaminationReports) {
         this.contaminationReports = contaminationReports;
     }
+
 
 }

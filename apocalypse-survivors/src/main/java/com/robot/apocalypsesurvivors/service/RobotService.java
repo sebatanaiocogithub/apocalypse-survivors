@@ -5,6 +5,7 @@ import com.robot.apocalypsesurvivors.repository.RobotRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 // Service class
@@ -13,6 +14,20 @@ public class RobotService {
 
     @Autowired
     private RobotRepository robotRepository;
+
+    //Get by serialNumber
+    public Robot getRobotBySerialNumber(String serialNumber) {
+        return robotRepository.findBySerialNumber(serialNumber);
+    }
+
+    //Get by model
+    public Robot getRobotByModel(String model) {
+        return robotRepository.findByModel(model);
+    }
+
+
+    //Get by manufactured Date
+
 
     //Get by category
     public List<Robot> getRobotsByCategory(String category) {

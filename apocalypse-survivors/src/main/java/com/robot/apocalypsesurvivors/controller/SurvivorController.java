@@ -16,6 +16,21 @@ public class SurvivorController {
     @Autowired
     private SurvivorService survivorService;
 
+    @PutMapping("/{survivorId}/location")
+    public ResponseEntity<Survivor> updateLastLocation(
+            @PathVariable Long survivorId,
+            @RequestParam Double latitude,
+            @RequestParam Double longitude) {
+        Survivor updatedSurvivor = survivorService.updateLastLocation(survivorId, latitude, longitude);
+        return ResponseEntity.ok(updatedSurvivor);
+    }
+
+    @PutMapping("/{survivorId}/report-contamination")
+    public ResponseEntity<Void> reportContamination(@PathVariable Long survivorId) {
+        survivorService.reportContamination(survivorId);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/infected")
     public ResponseEntity<List<Survivor>> getInfectedSurvivors() {
         List<Survivor> infectedSurvivors = survivorService.getInfectedSurvivors();
@@ -26,12 +41,6 @@ public class SurvivorController {
     public ResponseEntity<List<Survivor>> getNonInfectedSurvivors() {
         List<Survivor> nonInfectedSurvivors = survivorService.getNonInfectedSurvivors();
         return ResponseEntity.ok(nonInfectedSurvivors);
-    }
-
-    @PutMapping("/{survivorId}/report-contamination")
-    public ResponseEntity<Void> reportContamination(@PathVariable Long survivorId) {
-        survivorService.reportContamination(survivorId);
-        return ResponseEntity.ok().build();
     }
 
     //Create a new survivor

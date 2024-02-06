@@ -3,9 +3,11 @@ package com.robot.apocalypsesurvivors.controller;
 import com.robot.apocalypsesurvivors.entity.Robot;
 import com.robot.apocalypsesurvivors.service.RobotService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -15,25 +17,41 @@ public class RobotController {
     @Autowired
     private RobotService robotService;
 
-    @GetMapping("/category/{category}")
-    public Object getRobotsByCategory(@PathVariable String category) {
-        List<Robot> robots = robotService.getRobotsByCategory(category);
-        if (robots.isEmpty()) {
-            return robotService.getRobotsByCategory(category);
-        }
-        return ResponseEntity.ok(robots);
-    }
-
+    //Get robots by "land" category
     @GetMapping("/land")
     public ResponseEntity<List<Robot>> getRobotsByLandCategory() {
         List<Robot> landRobots = robotService.getRobotsByLandCategory();
         return ResponseEntity.ok(landRobots);
     }
 
+    //Get robots by "flying" category
     @GetMapping("/flying")
     public ResponseEntity<List<Robot>> getRobotsByFlyingCategory() {
         List<Robot> flyingRobots = robotService.getRobotsByFlyingCategory();
         return ResponseEntity.ok(flyingRobots);
+    }
+
+
+    //Get robot by model
+    @GetMapping("/{model}")
+    public ResponseEntity<Robot> getRobotByModel(@PathVariable String model) {
+        Robot robot = robotService.getRobotByModel(model);
+        if (robot != null) {
+            return ResponseEntity.ok(robot);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    //Get robot by serialNumber
+    @GetMapping("/serial/{serialNumber}")
+    public ResponseEntity<Robot> getRobotBySerialNumber(@PathVariable String serialNumber) {
+        Robot robot = robotService.getRobotBySerialNumber(serialNumber);
+        if (robot != null) {
+            return ResponseEntity.ok(robot);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     //Post a new robot

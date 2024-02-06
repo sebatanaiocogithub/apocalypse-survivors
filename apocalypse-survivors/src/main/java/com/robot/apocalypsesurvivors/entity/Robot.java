@@ -27,7 +27,10 @@ public class Robot {
     public Robot() {
     }
 
-    public Robot(String model, String serialNumber, String manufacturedDate, String category) {
+    public Robot(String model,
+                 String serialNumber,
+                 String manufacturedDate,
+                 String category) {
         this.model = model;
         this.serialNumber = serialNumber;
         this.manufacturedDate = manufacturedDate;
